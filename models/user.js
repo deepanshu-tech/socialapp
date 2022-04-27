@@ -2,8 +2,14 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const { stringify } = require("querystring");
 
 const UserSchema = new Schema({
+    username:{
+        type:String,
+        required:true,
+        unique:true
+    },
     name:{
         type:String,
         required:true,
@@ -23,6 +29,10 @@ const UserSchema = new Schema({
         type:String,
         default:"",
     },
+    coverpicture:{
+        type:String,
+        default:""
+    },
     followers:{
         type:Array,
         default:[]
@@ -30,6 +40,10 @@ const UserSchema = new Schema({
     following:{
         type:Array,
         default:[]
+    },
+    bio:{
+        type:String,
+        max:100
     },
     salt:String,
     hash:String
