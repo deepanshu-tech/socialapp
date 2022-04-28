@@ -3,8 +3,10 @@ const app = express();
 const helmet = require("helmet");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const userservice = require('./services/userservice');
+
 const dotenv = require('dotenv');
+const UserSchema = require('./models/user')
+const User = mongoose.model("user" , UserSchema);
 
 dotenv.config();
 
@@ -20,18 +22,76 @@ app.get("/" , (req,res)=>{
 })
 app.post("/" , async(req,res)=>{
     try{
-        const service = new userservice();
-        const result = await service.setUser(req.body);
-        res.status(200).send(result);
+          let user = req.body;
+          if(user["_id"] !== undefined) {
+            res.status(200).json("Account Already Exists");
+          }
+          else{
+              
+              const userObj = new User(user);
+              userObj.setPassword(user.password);
+             
+              const result = await userObj.save();
+              result["salt"] = "";
+              result["hash"] = "";
+
+              res.status(200).send(result);
+          }
+        
     }
     catch(err){
         res.status(500).json(err);
     }
 })
 app.post("/forgotpassword" , async(req,res)=>{
-    const service = new userservice();
-    const result = await service.forgotpwd(req.body.email);
-    res.send("Password sent to email-id");
+    try{
+        let email = req.body.email;
+        console.log(email);
+        let result = await User.findOne({"email":email});
+        console.log(result);
+        if(result){
+            let newpassword = generator.generate({
+                length:10,
+                numbers:true
+            })
+            let salt=crypto.randomBytes(16).toString("hex");
+            let hash=crypto.pbkdf2Sync(newpassword, salt, 1000,1000, "sha512").toString("hex");
+    
+            let updatedpwd = await User.updateOne(
+                {"email":email},
+                {$set:{"hash":hash , "salt":salt}}
+            )
+    
+    
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: process.env.EMAIL_ID,
+                  pass: process.env.PASSWORD
+                }
+              });
+              
+              var mailOptions = {
+                from: process.env.EMAIL_ID,
+                to: email,
+                subject: 'PASSWORD RESET',
+                text: 'This is your new password: '+newpassword+'. Try logging in with new credentials.'
+              };
+              
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    res.status(500).json("Error Recovering Password!")
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
+        }
+    }
+    catch(err){
+        res.status(502).json("Please Sign Up");
+    }
+    
+    
 })
 
 

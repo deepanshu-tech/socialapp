@@ -1,15 +1,57 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const userservice = require('../services/userservice');
+
 const UserSchema = require("../models/user");
 const User = mongoose.model("user" , UserSchema);
-const service = new userservice();
+
 
 router.post("/login" , async(req,res)=>{
     try{
-        const result = await service.loginUser(req.body.data , req.body.password);
-        res.status(200).send(result);
+        let data = req.body.data , password = req.body.password;
+        const result = await User.findOne({"email":data , "isDel":false});
+        if(result){
+            let user = result;
+                if(user.validatePassword(password)){
+                    user["hash"] = "";
+                    user["salt"] = "";
+
+                    const objUser = user.toObject();
+
+                    objUser.token = user.generateToken();
+                    res.status(200).json(objUser);
+
+                }
+                else{
+                    res.status(500).json("Invalid Password");
+                }
+            }
+            
+        else{
+            
+            const res1 = await User.findOne({"username":data});
+            if(res1)
+            {
+               
+                if(res1.validatePassword(password)){
+                    res1["hash"] = "";
+                    res1["salt"] = "";
+
+                    const objUser = res1.toObject();
+
+                    objUser.token = res1.generateToken();
+                    res.status(200).json(objUser);
+
+                }
+                else{
+                    res.status(500).json("Invalid Password");
+                }
+            }
+            else
+            {
+                res.status(500).json("Invalid Credentials");
+            }
+        }
     }
     catch(err){
         res.status(500).json(err);
@@ -20,20 +62,24 @@ router.post("/edit/:id" , async(req,res)=>{
     if(req.body.userId === req.params.id){
        
         try{
-            const result = await service.editUser(req.body , req.body.userId);
+            let deletedUser = await User.findByIdAndUpdate(req.params.id,  {$set:req.body});
             res.status(200).send(result);
         }
         catch(err){
             res.status(500).json(err);
         }
     }
+    else{
+        res.status(500).json("Cannot Update the Data")
+    }
 })
 
 router.delete("/:id" , async(req,res)=>{
     
     try{
-        const result = await service.deleteUser(req.params.id);
-        res.status(200).json(result);
+        let deletedUser = await User.findByIdAndUpdate(req.params.id,  {$set:{"isDel":true}});
+        
+        res.status(200).json(deletedUser);
     }
     catch(err){
         res.status(500).json(err);
