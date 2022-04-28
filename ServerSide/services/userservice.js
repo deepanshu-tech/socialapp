@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = mongoose.model("user" , UserSchema);
 const generator = require('generate-password');
 var nodemailer = require('nodemailer');
-const { from } = require("nodemailer/lib/mime-node/le-windows");
+
 
 
 
@@ -16,11 +16,14 @@ class userservice{
             return ("Account Already Exists")
           }
           else{
+              
               const userObj = new User(user);
               userObj.setPassword(user.password);
+             
               const result = await userObj.save();
               result["salt"] = "";
               result["hash"] = "";
+              
               return result;
           }
     }
