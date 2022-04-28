@@ -5,6 +5,9 @@ const jwt = require("jsonwebtoken");
 const User = mongoose.model("user" , UserSchema);
 const generator = require('generate-password');
 var nodemailer = require('nodemailer');
+const { from } = require("nodemailer/lib/mime-node/le-windows");
+
+
 
 class userservice{
     
@@ -22,9 +25,9 @@ class userservice{
           }
     }
     async loginUser(data , password){
-        const result = await User.findOne({"email":data});
+        const result = await User.findOne({"email":data , "isDel":false});
         if(result){
-            const user = result;
+            let user = result;
                 if(user.validatePassword(password)){
                     user["hash"] = "";
                     user["salt"] = "";
@@ -53,7 +56,7 @@ class userservice{
                     const objUser = res1.toObject();
 
                     objUser.token = res1.generateToken();
-                    return objUser;
+                    return await objUser;
 
                 }
                 else{
@@ -110,5 +113,30 @@ class userservice{
             return ("Please sign up!")
         }
     }
+
+    async editUser(user , id){
+       
+        if(user["password"])
+        { 
+            let salt=crypto.randomBytes(16).toString("hex");
+            let hash=crypto.pbkdf2Sync(user["password"], salt, 1000,1000, "sha512").toString("hex");
+
+            let updatedpwd = await User.updateOne(
+                {"_id":id},
+                {$set:{"hash":hash , "salt":salt}}
+            )
+        }
+       
+        let updatedUser = await User.findByIdAndUpdate(id , {$set:user});
+
+        return await updatedUser;
+    }
+
+    async deleteUser(id){
+        let deletedUser = await User.findByIdAndUpdate(id,  {$set:{"isDel":true}});
+        return await deletedUser;
+    }
+
+    
 }
 module.exports=userservice;

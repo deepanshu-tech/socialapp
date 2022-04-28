@@ -14,6 +14,7 @@ app.use(helmet())
 app.use(cors());
 
 app.use('/users' , require('./routes/users'));
+app.use('/posts' , require('./routes/posts'));
 app.get("/" , (req,res)=>{
     res.send("<h1>Welcome to SocialApp</h1>");
 })
