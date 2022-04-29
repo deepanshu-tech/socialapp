@@ -12,6 +12,7 @@ export default function Home() {
   // console.log(location.state._id);
   return (
     
+    <>
     <div>
       <Topbar/>
       <div className="homeContainer">
@@ -23,6 +24,7 @@ export default function Home() {
 
     
     </div>
+    </>
   );
 }
     {/* <div className="homeContainer">
