@@ -88,7 +88,7 @@ app.post("/forgotpassword" , async(req,res)=>{
         }
     }
     catch(err){
-        res.status(502).json("Please Sign Up");
+        res.status(400).json("Please Sign Up");
     }
     
     

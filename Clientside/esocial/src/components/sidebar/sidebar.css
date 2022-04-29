@@ -1,8 +1,12 @@
 .sidebar{
-    flex: 2.5;
-    height: calc(100vh-50px);
+    flex: 3;
+    height: calc(100vh   50px);
     overflow-y: scroll;
+    position: sticky;
+    top: 50px;
 }
+
+  
 .sidebarWrapper{
 padding: 20px;
 background-color: whitesmoke;
@@ -15,6 +19,7 @@ background-color: whitesmoke;
 .sidebarListItem{
 display: flex;
 margin-bottom: 20px;
+align-items: center;
 }
 .sidebarIcon{
     margin-right: 10px;

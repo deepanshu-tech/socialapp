@@ -8,6 +8,7 @@ import "./login.css"
 export default function Login() {
   const[userData , setUserData] = useState();
   const[password , setPassword] = useState();
+  const [error , setError] = useState();
   const navigate = useNavigate();
   const loginHandler = async(event)=>{
       event.preventDefault();
@@ -16,15 +17,21 @@ export default function Login() {
         "password":password
       }).then((res)=>{
         if(res.status === 200){
-          
           navigate('/home');
         }
-      });
+      }).catch(err=>{
+        setError(err);
+      })
           
+  }
+  if(error)
+  {
+    alert("Incorrect Credentials, Try Again!");
+    return <Login/>
   }
   const createUserHandler = (event)=>{
     event.preventDefault();
-    navigate('/signup')
+    navigate('/register')
   }
   const forgotpwdhandler = (event)=>{
     event.preventDefault();
