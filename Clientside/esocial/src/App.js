@@ -4,19 +4,15 @@
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
-<<<<<<< HEAD
 import Profile from "./pages/profile/Profile";
 
-=======
 import {Routes , Route} from 'react-router-dom'
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
->>>>>>> refs/remotes/origin/main
 
 
 
 function App() {
-<<<<<<< HEAD
-  return <Profile/>
+ // return <Profile/>
   //<Login/>
   //<Register/>
   //<Home/>
@@ -33,14 +29,13 @@ function App() {
     //     <Route path="/forgotpassword" element={<ForgotPassword/>}/>
     //   </Routes> 
     // </div>
-=======
   return(
   // <Login/>
   // <Register/>
   // <Home/>
   // <Register/>
   // <Login/>
->>>>>>> refs/remotes/origin/main
+  //<Profile/>
   
     <div>
       <Routes>
