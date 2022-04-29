@@ -17,7 +17,8 @@ export default function Login() {
         "password":password
       }).then((res)=>{
         if(res.status === 200){
-          navigate('/home');
+          console.log(res.data);
+          navigate('/home' , {state:res.data});
         }
       }).catch(err=>{
         setError(err);

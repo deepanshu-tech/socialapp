@@ -36,13 +36,8 @@ function ForgotPassword(){
             </div>
                 <div className="loginRight">
                     <div className="loginBox">
-                    
                         <input placeholder="Enter your Registered Email" className="loginInput" onChange={ event => setEmail(event.target.value) }/>
-                       
-
                         <button className="loginButton"onClick={submitHandler}>Recover Password</button>
-                    
-
                     </div>
                 </div>
             
