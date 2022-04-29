@@ -23,7 +23,7 @@ router.post("/login" , async(req,res)=>{
 
                 }
                 else{
-                    res.status(500).json("Invalid Password");
+                    res.status(400).json("Invalid Password");
                 }
             }
             
@@ -44,12 +44,12 @@ router.post("/login" , async(req,res)=>{
 
                 }
                 else{
-                    res.status(500).json("Invalid Password");
+                    res.status(400).json("Invalid Password");
                 }
             }
             else
             {
-                res.status(500).json("Invalid Credentials");
+                res.status(400).json("Invalid Credentials");
             }
         }
     }
