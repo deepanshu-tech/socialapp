@@ -5,7 +5,32 @@ const router = express.Router();
 const UserSchema = require("../models/user");
 const User = mongoose.model("user" , UserSchema);
 
-
+router.post("/searchuser" , async(req,res)=>{
+    try{
+        let result = await User.findOne({"username":req.body.username});
+        console.log(req.body.username);
+        if(result)
+            res.status(200).json(result);
+        else 
+            res.status(500).json(err);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+});
+router.post("/searchname" , async(req,res)=>{
+    try{
+        let result = await User.findOne({"userId":req.body.userId});
+        
+        if(result)
+            res.status(200).json(result);
+        else 
+            res.status(500).json(err);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+});
 router.post("/login" , async(req,res)=>{
     try{
         let data = req.body.data , password = req.body.password;
@@ -62,8 +87,9 @@ router.post("/edit/:id" , async(req,res)=>{
     if(req.body.userId === req.params.id){
        
         try{
-            let deletedUser = await User.findByIdAndUpdate(req.params.id,  {$set:req.body});
-            res.status(200).send(result);
+            let user =await User.findByIdAndUpdate(req.params.id,  {$set:req.body});
+            
+            res.status(200).send(user);
         }
         catch(err){
             res.status(500).json(err);

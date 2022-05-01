@@ -1,27 +1,56 @@
 import "./topbar.css"
 import { Person, Search ,Chat,Notifications } from "@mui/icons-material"
-
+import axios from "axios"
 import { useNavigate } from "react-router"
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Topbar() {
+  
+  
   const navigate = useNavigate();
-  const logoutHandler = ()=>{
-    navigate('/');
+  const {profilePicture} = useSelector(state=>state);
+  const [searchData , setsearchdata] = useState();
+  
+  const profileHandler = (e)=>{
+    e.preventDefault();
+   
+    navigate('/profile' );
+  }
+  const logoHandler = (e)=>{
+    e.preventDefault();
+    navigate('/home');
+  }
+  const searchHandler = async(e)=>{
+      e.preventDefault();
+      console.log(searchData);
+      await axios.post(
+        "http://localhost:3000/users/searchuser",
+        {
+          "username":searchData
+        }
+      ).then((res)=>{
+        navigate('/searchprofile' , {state:res.data});
+      }).catch((err)=>{
+        alert("Error Occured");
+        setsearchdata('');
+      })
   }
   return (
     <div className="topbarContainer">
         <div className="topbarLeft">
-          <span className="logo" >Esocial</span>
+          <span className="logo" onClick={logoHandler}>Esocial</span>
         </div>
         <div className="topbarCenter">
           <div className="searchbar">
             <Search className="searchIcon"/>
-            <input placeholder="Search for friends ,post or video" className="searchinput" />
+            <input placeholder="Search for friends ,post or video" className="searchinput" value={searchData} onChange={event => setsearchdata(event.target.value)}/>
+            <input type="button" value="search" onClick={searchHandler}></input>
           </div>
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
-            <button className="topbarLink" onClick={logoutHandler}>Logout</button>
+            <a href = "http://localhost:3002"> Logout </a>
            
           </div>
           <div className="topbarIcons">
@@ -38,7 +67,7 @@ export default function Topbar() {
               <span className="topbarIconBadge">1</span>
             </div> */}
           </div>
-          <img src="/assets/person/1.jpeg" alt="" className="topbarImg" />
+          <img src={profilePicture} alt="" className="topbarImg" onClick={profileHandler} />
         </div>
 
 

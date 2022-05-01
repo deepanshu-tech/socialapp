@@ -84,11 +84,13 @@ router.post("/:postid/react" , async(req , res)=>{
         if(!post.likes.includes(req.body.userId))
         {
             await post.updateOne({$push:{likes:req.body.userId}});
-            res.status(200).json("Post Liked!")
+            post = await Post.findById(req.params.postid);
+            res.status(200).json(post);
         }
         else{
             await post.updateOne({$pull:{likes:req.body.userId}});
-            res.status(200).json("Post Disliked!")
+            post = await Post.findById(req.params.postid);
+            res.status(200).json(post);
         }
     }
     catch(err){

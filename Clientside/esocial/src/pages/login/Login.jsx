@@ -1,24 +1,37 @@
 
 import axios from "axios";
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./login.css"
 
+
+
 export default function Login() {
+  
+  
   const[userData , setUserData] = useState();
   const[password , setPassword] = useState();
   const [error , setError] = useState();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginHandler = async(event)=>{
+    
       event.preventDefault();
       await axios.post("http://localhost:3000/users/login" , {
         "data":userData,
         "password":password
       }).then((res)=>{
         if(res.status === 200){
-          console.log(res.data);
-          navigate('/home' , {state:res.data});
+          dispatch({type:"add_userid" , value: res.data._id});
+          dispatch({type:"add_email" , value: res.data.email});
+          dispatch({type:"add_username" , value: res.data.username});
+          dispatch({type:"set_pp" , value: res.data.profilepicture});
+          dispatch({type:"set_cp" , value: res.data.coverpicture});
+          dispatch({type:"set_bio" , value: res.data.bio});
+
+          navigate('/home');
         }
       }).catch(err=>{
         setError(err);

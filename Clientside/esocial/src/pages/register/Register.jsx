@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
   const [username , setUsername]= useState();
@@ -11,7 +12,7 @@ export default function Register() {
     const [password , setPassword] = useState();
     const [error, setError] = useState();
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const submitButtonHandler = async (e)=>{
         e.preventDefault();
 
@@ -26,6 +27,10 @@ export default function Register() {
         ).then((res)=>{
             if(res.status === 200)
             {
+              dispatch({type:"add_userid" , value: res.data._id});
+              dispatch({type:"add_email" , value: res.data.email});
+              dispatch({type:"add_username" , value: res.data.username});
+    
                navigate('/home');
             }
         }).catch(err=>{

@@ -21,6 +21,9 @@ const PostSchema = new Schema({
     isDel:{
         type:Boolean,
         default:false
+    },
+    username:{
+        type:String
     }
 });
 
