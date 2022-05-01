@@ -1,6 +1,8 @@
 import "./rightbar.css"
-
-export default function Rightbar({profile}) {
+import { useSelector }  from "react-redux";
+import axios from "axios";
+import { useState } from "react";
+export default function Rightbar(props) {
   const HomeRightBar= ()=> {
     return (
       <>
@@ -9,8 +11,49 @@ export default function Rightbar({profile}) {
     )
   }
   const ProfileRightbar = () =>{
+    const {username} = useSelector(state=>state);
+    const [flowers , setfollowers] = useState();
+    const [followClicked , setFollowClicked] = useState(false); 
+    const [followingClicked , setFollowingClicked] = useState(false);
+    const [flowingers , setfollowingers] = useState(); 
+    const followerManager = async (e)=>{
+      e.preventDefault();
+      await axios.post(
+        "http://localhost:3000/users/searchuser",
+        {
+          "username":username
+        }).then(
+          (res)=>{
+           
+            setfollowers(res.data.followers);
+            setFollowClicked(true);
+          }
+        ).catch(err =>{
+          alert("Error Occuered!")
+        })
+    }
+      
+        const followingManager = async (e)=>{
+          e.preventDefault();
+          await axios.post(
+            "http://localhost:3000/users/searchuser",
+            {
+              "username":username
+            }).then(
+              (res)=>{
+               
+                setfollowingers(res.data.following);
+                setFollowingClicked(true);
+              }
+            ).catch(err =>{
+              alert("Error Occuered!")
+            })
+          
+
+    }
+    
     return(<>
-    <h4 className="righbarTitle">User Info</h4>
+    {/* <h4 className="righbarTitle">User Info</h4>
     <div className="rightbarInfo">
       <div className="rightbarInfoItem">
         <span className="rightbarInfoKey">City:</span>
@@ -24,41 +67,39 @@ export default function Rightbar({profile}) {
         <span className="rightbarInfoKey">Gender:</span>
         <span className="rightbarInfoValue">M</span>
       </div>
-    </div>
-    <h4 className="rightbarTitle">User Friends</h4>
-    <div className="rightbarFollowings">
-      <div className="rightbarFollowing">
-        <img src="assets/person/2.jpeg" alt="" className="righbarFollowingImg" />
-        <span className="rightbarFollowingName">Wong</span>
-      </div>
-      <div className="rightbarFollowing">
-        <img src="assets/person/3.jpeg" alt="" className="righbarFollowingImg" />
-        <span className="rightbarFollowingName">Steve</span>
-      </div>
-      <div className="rightbarFollowing">
-        <img src="assets/person/3.jpeg" alt="" className="righbarFollowingImg" />
-        <span className="rightbarFollowingName">Steve</span>
-      </div>
-      <div className="rightbarFollowing">
-        <img src="assets/person/3.jpeg" alt="" className="righbarFollowingImg" />
-        <span className="rightbarFollowingName">Steve</span>
-      </div>
-      <div className="rightbarFollowing">
-        <img src="assets/person/1.jpeg" alt="" className="righbarFollowingImg" />
-        <span className="rightbarFollowingName">Barack</span>
-      </div>
-      <div className="rightbarFollowing">
-        <img src="assets/person/3.jpeg" alt="" className="righbarFollowingImg" />
-        <span className="rightbarFollowingName">Steve</span>
-      </div>
-    </div>
+    </div> */}
+    <button onClick={followerManager}>Followers</button>
+    {
+      followClicked ? ( <ul>
+        {
+            flowers.map((flower)=>(
+                <li key = {flower}>{flower}</li>)
+            )
+        }
+      </ul>) : (null)
+    }
+    <button onClick={followingManager}>Followings</button>
+    {
+      followingClicked ? ( <ul>
+        {
+            flowingers.map((flowing)=>(
+                <li key = {flowing}>{flowing}</li>)
+            )
+        }
+      </ul>) : (null)
+    }
+    
+   
+      
         </>)
   }
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-          <ProfileRightbar/>
-          {/* <HomeRightBar/> if we need to acess the home page feed*/}
+        {
+          props.type === "profile" ? <ProfileRightbar/> : <HomeRightBar/>
+        }
+          
       </div>
     </div>
   )

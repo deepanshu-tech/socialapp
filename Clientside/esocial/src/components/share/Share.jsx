@@ -4,66 +4,82 @@ import { useLocation , useNavigate} from "react-router"
 import axios from "axios";
 import { useState } from "react";
 import Home from "../../pages/home/Home";
-export default function Share(props) {
-    console.log(props.userDetails);
+import { useDispatch, useSelector } from "react-redux";
+export default function Share() {
+   
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [desc , setDesc] = useState();
+    const [imgfile , setImgFile] = useState()
     const [error , setError] = useState();
+    const {userId , flag,username} = useSelector((state)=>state)
+    
     const submitHandler = (e)=>{
         e.preventDefault();
+       console.log(username);
+        // navigate('/home');
         axios.post(
             "http://localhost:3000/posts/",
             {
-                "userId":props.userDetails._id,
-                "description":desc
+                "userId":userId,
+                "description":desc,
+                "username":username,
+                "image":imgfile
             }
         ).then((res)=>{
             if(res.status === 200){
-                navigate("/home" , {state:props.userDetails});
+                setDesc('');
+                setImgFile('');
+                console.log("value in share component: "+flag);
+                dispatch({type:"set_flag" , value: (!flag) });
+                navigate('/home');
             }
         }).catch(err=>{
-            setError(err);
+            alert('error while creating post!');
+            setDesc('');
+            navigate('/home');
         })
     }
-    if(error)
-    {
-        alert("Error Creating a post. Try Again");
-        return(<div>
-             <Home userDetails = {props.userDetails} />
-        </div>
-       )
-    }
+    
 
   return (
-    <div>
+    <form onSubmit={submitHandler}>
         <div className="shareWrapper">
             <div className="shareTop">
                 <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
-                <input placeholder =" What's on your mind Username" className="shareInput" onChange={event => setDesc(event.target.value)}/>
+                <input placeholder =" What's on your mind Username" value = {desc} className="shareInput" onChange={event => setDesc(event.target.value)}/>
+                
+                
                 </div>  
                 <hr className="shareHr"/>
                 <div className="shareBottom">
-                    {/* <div className="shareOptions">
-                    <   div className="shareOption"> 
+                    <div className="shareOptions">
+                    <label>
+                        Drop the Image URL:
+                        <input type="text" value={imgfile}  onChange={event => setImgFile(event.target.value)} />   
+                    </label>
+                   
+                     {/* <label htmlFor="file" className="shareOption"> 
                         <PermMedia htmlColor="tomato" className="shareIcon"/> 
+                        <span className="shareOptionText">Photo/Video</span>
+                        <input style={{display:"none"}} type="file" id="file" accept =".png , .jpeg , .jpg"  onChange={e => setImgFile(e.target.value)}></input>
+                    </label>  */}
+                    {/* <   div className="shareOption"> 
+                        <PermMedia className="shareIcon"/> 
+                        <span className="shareOptionText">Photo/Video</span>
+                    </div>
+                    <   div className="shareOption"> 
+                        <PermMedia className="shareIcon"/> 
                         <span className="shareOptionText">Photo/Video</span>
                     </div> 
                     <   div className="shareOption"> 
                         <PermMedia className="shareIcon"/> 
                         <span className="shareOptionText">Photo/Video</span>
-                    </div>
-                    <   div className="shareOption"> 
-                        <PermMedia className="shareIcon"/> 
-                        <span className="shareOptionText">Photo/Video</span>
-                    </div>
-                    <   div className="shareOption"> 
-                        <PermMedia className="shareIcon"/> 
-                        <span className="shareOptionText">Photo/Video</span>
-                    </div>
                     </div> */}
-                   <button className="shareButton" onClick={submitHandler}>Share</button>
+                    </div>
+                   <button className="shareButton" type = "submit" >Share</button>
                 </div>
         </div>
-    </div>
+    </form>
   )
 }

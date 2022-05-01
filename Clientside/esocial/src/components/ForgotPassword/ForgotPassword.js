@@ -15,7 +15,8 @@ function ForgotPassword(){
         ).then((res)=>{
             if(res.status === 200)
             {
-                navigate("/login");
+                alert("Recovery Mail Sent")
+                navigate("/");
             }
         }).catch(err=>{
             setError(err);

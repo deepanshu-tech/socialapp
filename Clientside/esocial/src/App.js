@@ -8,41 +8,33 @@ import Profile from "./pages/profile/Profile";
 
 import {Routes , Route} from 'react-router-dom'
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import FriendProfile from "./components/FriendProfile/FriendProfile";
+import UserDetails from "./pages/UserDetails/UserDetails";
 
 
 
 function App() {
- // return <Profile/>
-  //<Login/>
-  //<Register/>
-  //<Home/>
-  //<Register/>
-  //<Login/>
-  //
-    // <div>
-    //   <Home/>
-    //   <Routes>
-    //     <Route path="/" element={<Login/>} />
-    //     <Route path="/signup" element={<Signup/>} />
-    //     <Route path="/home" element={<Home/>} />
-    //     <Route path="/register" element={<Register/>} />
-    //     <Route path="/forgotpassword" element={<ForgotPassword/>}/>
-    //   </Routes> 
-    // </div>
+ 
   return(
   // <Login/>
   // <Register/>
   // <Home/>
   // <Register/>
   // <Login/>
-  //<Profile/>
- 
+  // <Profile/>
+  // <FriendProfile/>
+  //<UserDetails/>
+  
     <div>
       <Routes>
         <Route exact path="/" element={<Login/>} />
         <Route path="/forgotpassword" element={<ForgotPassword/>} />
         <Route path="/home" element={<Home/>} />
         <Route path="/register" element={<Register/>} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/searchprofile" element={<FriendProfile/>}></Route>
+        <Route path = "/userDetails" element={<UserDetails/>}></Route>
+
        
       </Routes> 
     </div>
