@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
 
 function ForgotPassword(){
     const [email , setEmail]= useState();
     const [error , setError] = useState();
     const navigate = useNavigate();
+
+   
     const submitHandler = ()=>{
         axios.post(
             "http://localhost:3000/forgotpassword",

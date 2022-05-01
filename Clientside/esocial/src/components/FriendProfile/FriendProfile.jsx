@@ -7,10 +7,12 @@ import {PermMedia} from "@mui/icons-material"
 import { useLocation } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useState , useEffect } from "react";
 
 export default function FriendProfile() {
     const location = useLocation();
     const {userId} = useSelector(state=>state);
+    
     const followHandler = (e)=>{
         e.preventDefault();
         axios.post(
@@ -52,15 +54,15 @@ export default function FriendProfile() {
                 <div className="profileRightTop">
 
                     <div className="profileCover">
-                        <img src="assets/post/2.jpeg" className="profileCoverImg" alt="" />
-                        <img src="assets/post/1.jpeg" className="profileUserImg" alt="" />
+                        <img src={location.state.profilepicture} className="profileCoverImg" alt="" />
+                        <img src={location.state.coverpicture} className="profileUserImg" alt="" />
                     </div>
 
                     
 
                     <div className="profileInfo">
-                        <h4 className="profileInfoName">Username here </h4>
-                        <p className="profileInfoDesc">username info here</p>
+                        <h4 className="profileInfoName">{location.state.username} </h4>
+                        <p className="profileInfoDesc">{location.state.bio}</p>
                     </div>
                 </div>
                 <input type="button" value ="follow" onClick={followHandler}></input>
