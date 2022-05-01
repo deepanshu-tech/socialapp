@@ -1,9 +1,9 @@
 FROM node
 WORKDIR /app
 COPY package.json .
-RUN npm i 
+RUN npm install -g
 COPY . . 
-EXPOSE 3000
+EXPOSE 5000
 CMD [ "npm","start" ]
 
 

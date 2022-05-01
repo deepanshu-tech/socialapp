@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  server:
+    build:
+      context: ./ServerSide
+      dockerfile: Dockerfile
+    image: social-server
+    container_name: social-node-server
+    command: /usr/src/app/node_modules/.bin/nodemon index.js
+    volumes:
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    networks:
+      - social-network
+
+  mongo:
+    image: mongo
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - social-network
+
+  client:
+    build:
+      context: ./Clientside/esocial
+      dockerfile: Dockerfile
+    image: social-client
+    container_name: social-react-client
+    command: npm start
+    volumes:
+      - ./Clientside/esocial/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - social-network
+
+networks:
+  social-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+  node_modules:
+  web-root:
+    driver: local
