@@ -16,21 +16,47 @@ export default function Rightbar(props) {
     const [followClicked , setFollowClicked] = useState(false); 
     const [followingClicked , setFollowingClicked] = useState(false);
     const [flowingers , setfollowingers] = useState(); 
+   
     const followerManager = async (e)=>{
+     
       e.preventDefault();
       await axios.post(
         "http://localhost:3000/users/searchuser",
         {
           "username":username
         }).then(
-          (res)=>{
-           
-            setfollowers(res.data.followers);
+          async (res)=>{
+            var temp = res.data.followers;
+            var newtemp = [];
+            
+            await Promise.all(
+              temp.map(async (t)=>{
+                      await axios.post(
+                      "http://localhost:3000/users/searchname",
+                      {
+                        "userId":t
+                      }
+                    ).then((res)=>{
+                      
+                      newtemp.push(res.data.username);
+                      console.log(t);
+                    }).catch(err=>{
+                      alert("Some Error Occured!")
+                    })
+                  }
+              ))
+
+            setfollowers(newtemp);
             setFollowClicked(true);
+            
+           
           }
         ).catch(err =>{
           alert("Error Occuered!")
         })
+
+        
+        
     }
       
         const followingManager = async (e)=>{
@@ -40,9 +66,27 @@ export default function Rightbar(props) {
             {
               "username":username
             }).then(
-              (res)=>{
-               
-                setfollowingers(res.data.following);
+              async (res)=>{
+                var temp = res.data.following;
+                var newtemp = [];
+            
+            await Promise.all(
+              temp.map(async (t)=>{
+                      await axios.post(
+                      "http://localhost:3000/users/searchname",
+                      {
+                        "userId":t
+                      }
+                    ).then((res)=>{
+                      
+                      newtemp.push(res.data.username);
+                      console.log(t);
+                    }).catch(err=>{
+                      alert("Some Error Occured!")
+                    })
+                  }
+              ))
+                setfollowingers(newtemp);
                 setFollowingClicked(true);
               }
             ).catch(err =>{
@@ -51,6 +95,8 @@ export default function Rightbar(props) {
           
 
     }
+    
+    
     
     return(<>
     {/* <h4 className="righbarTitle">User Info</h4>
@@ -69,6 +115,7 @@ export default function Rightbar(props) {
       </div>
     </div> */}
     <button onClick={followerManager}>Followers</button>
+    
     {
       followClicked ? ( <ul>
         {
