@@ -3,11 +3,12 @@ const app = express();
 const helmet = require("helmet");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+const crypto = require("crypto");
 const dotenv = require('dotenv');
 const UserSchema = require('./models/user')
 const User = mongoose.model("user" , UserSchema);
-
+const generator = require('generate-password');
+var nodemailer = require('nodemailer');
 dotenv.config();
 
 app.use(express.json());
@@ -48,12 +49,14 @@ app.post("/forgotpassword" , async(req,res)=>{
         let email = req.body.email;
         console.log(email);
         let result = await User.findOne({"email":email});
-        console.log(result);
+       // console.log(result);
         if(result){
+            
             let newpassword = generator.generate({
                 length:10,
                 numbers:true
             })
+            
             let salt=crypto.randomBytes(16).toString("hex");
             let hash=crypto.pbkdf2Sync(newpassword, salt, 1000,1000, "sha512").toString("hex");
     
@@ -61,6 +64,8 @@ app.post("/forgotpassword" , async(req,res)=>{
                 {"email":email},
                 {$set:{"hash":hash , "salt":salt}}
             )
+
+           
     
     
             var transporter = nodemailer.createTransport({
@@ -85,10 +90,11 @@ app.post("/forgotpassword" , async(req,res)=>{
                   console.log('Email sent: ' + info.response);
                 }
               });
+              res.status(200).json("password reset done!")
         }
     }
     catch(err){
-        res.status(400).json("Please Sign Up");
+        res.status(400).json(err);
     }
     
     
