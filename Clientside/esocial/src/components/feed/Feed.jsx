@@ -32,7 +32,7 @@ export default function Feed() {
         alert("Some error Occured!");
         navigate('/home');
     })
-  },[flag , ]);
+  },[flag]);
 
   
 

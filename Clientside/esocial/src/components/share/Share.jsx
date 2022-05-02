@@ -51,7 +51,7 @@ export default function Share() {
         <div className="shareWrapper">
             <div className="shareTop">
                 <img className="shareProfileImg" src={profilePicture} alt="" />
-                <input placeholder =" What's on your mind Username" value = {desc} className="shareInput" onChange={event => setDesc(event.target.value)}/>
+                <input placeholder = {"What's on your mind "+ username} value = {desc} className="shareInput" onChange={event => setDesc(event.target.value)}/>
                 
                 
                 </div>  

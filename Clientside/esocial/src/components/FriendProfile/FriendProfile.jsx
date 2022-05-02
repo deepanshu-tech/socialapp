@@ -58,8 +58,8 @@ export default function FriendProfile() {
                 <div className="profileRightTop">
 
                     <div className="profileCover">
-                        <img src={location.state.profilepicture} className="profileCoverImg" alt="" />
-                        <img src={location.state.coverpicture} className="profileUserImg" alt="" />
+                        <img src={location.state.coverpicture} className="profileCoverImg" alt="" />
+                        <img src={location.state.profilepicture} className="profileUserImg" alt="" />
                     </div>
 
                     

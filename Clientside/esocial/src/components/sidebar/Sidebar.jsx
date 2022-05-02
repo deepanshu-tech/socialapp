@@ -12,14 +12,14 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
-          <li className="sidebarListItem">
+          {/* <li className="sidebarListItem">
               <RssFeed className="sidebarIcon"/>
               <span className="sidebarListItemText">Feed</span>
           </li>
           <li className="sidebarListItem">
               <People className="sidebarIcon"/>
               <span className="sidebarListItemText">Friends</span>
-          </li>
+          </li> */}
           <li className="sidebarListItem">
               <ChatBubble className="sidebarIcon"/>
               <span className="sidebarListItemText">Chat</span>
@@ -27,10 +27,10 @@ export default function Sidebar() {
         </ul>
         <hr className="sidebarHr" />
         <ul className="sidebarFriend">
-          <li className="sidebarFriendList" >
+          {/* <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
             <spam className="sidebarFriendName">Wong</spam>
-            </li>
+            </li> */}
           {/* 
           <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
