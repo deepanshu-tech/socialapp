@@ -1,13 +1,11 @@
 import  "./FriendProfile.css"
-import Feed from "../../components/feed/Feed";
-import Rightbar from "../../components/rightbar/Rightbar";
-import Sidebar from "../../components/sidebar/Sidebar";
+
 import Topbar from "../../components/topbar/Topbar";
-import {PermMedia} from "@mui/icons-material"
+
 import { useLocation } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useState , useEffect } from "react";
+
 
 export default function FriendProfile() {
     const location = useLocation();

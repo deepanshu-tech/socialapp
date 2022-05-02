@@ -1,14 +1,14 @@
 import "./post.css"
 import { MoreVert } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import axios from "axios"
 
 export default function Post(props) {
   
-  const dispatch = useDispatch();
+ 
   const [like,setLike] = useState(props.postDetails.likes.length)
-  const {userId , profilePicture , flag} = useSelector(state=>state);
+  const {userId , flag} = useSelector(state=>state);
   const [show, setShow] =useState(false);
   //const [isLiked,setIsLike] = useState(false)
   
@@ -64,7 +64,7 @@ export default function Post(props) {
         {/* dividing wrapper in 3 top,center bottom  */}
              <div className="postTop">
              <div className="postTopLeft">
-               {/* <img src={props.postDetails.profilepicture} className="postProfileImg" alt="" /> */}
+               <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Color-yellow.JPG" className="postProfileImg" alt="" />
                <span className="postUsername">  {props.postDetails.username} </span>
                {/* <span className="postDate">X mins ago</span> */}
              </div> 

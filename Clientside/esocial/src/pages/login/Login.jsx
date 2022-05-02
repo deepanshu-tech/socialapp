@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./login.css"

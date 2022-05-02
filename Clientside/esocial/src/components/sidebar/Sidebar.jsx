@@ -1,6 +1,5 @@
 import "./sidebar.css"
-import { RssFeed } from "@mui/icons-material"
-import { People } from "@mui/icons-material"
+
 import { ChatBubble } from "@mui/icons-material"
 
 export default function Sidebar() {

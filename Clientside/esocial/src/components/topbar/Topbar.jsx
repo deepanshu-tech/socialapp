@@ -1,7 +1,7 @@
 import "./topbar.css"
-import { Person, Search ,Chat,Notifications } from "@mui/icons-material"
+import {Search} from "@mui/icons-material"
 import axios from "axios"
-import { Navigate, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

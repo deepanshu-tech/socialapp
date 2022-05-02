@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router";
+
 function UserDetails(){
 
-    const {username , email ,userId , profilePicture , coverPicture ,bio} = useSelector(state=>state)
+    const {username ,userId , profilePicture , coverPicture ,bio} = useSelector(state=>state)
     const [Bio , setBio] = useState(bio)
     const [pp , setPP] = useState(profilePicture)
     const [cp , setCP] = useState(coverPicture)
-    const dispatch = useDispatch();
+   
   
 
     const submitHandler = ()=>{
@@ -43,9 +43,9 @@ function UserDetails(){
                     <div className="loginBox">
                         <input placeholder="Your Bio" className="loginInput" onChange={e => setBio(e.target.value)}/>
                         
-                        <input placeholder="Your Image URL" className="loginInput" onChange={e => setCP(e.target.value)}/>
+                        <input placeholder="Update your CoverPicture" className="loginInput" onChange={e => setCP(e.target.value)}/>
                         
-                        <input placeholder="Your Bio" className="loginInput" onChange={e => setPP(e.target.value)}/>
+                        <input placeholder="Update your ProfilePicture" className="loginInput" onChange={e => setPP(e.target.value)}/>
                         
                         <a href="http://localhost:5000" onClick={submitHandler}> Apply Changes</a>
                        

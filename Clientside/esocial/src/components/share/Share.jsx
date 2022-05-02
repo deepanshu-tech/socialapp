@@ -1,9 +1,9 @@
 import "./share.css"
-import{PermMedia} from "@mui/icons-material"
-import { useLocation , useNavigate} from "react-router"
+
+import { useNavigate} from "react-router"
 import axios from "axios";
 import { useState } from "react";
-import Home from "../../pages/home/Home";
+
 import { useDispatch, useSelector } from "react-redux";
 export default function Share() {
    
@@ -11,7 +11,7 @@ export default function Share() {
     const dispatch = useDispatch();
     const [desc , setDesc] = useState();
     const [imgfile , setImgFile] = useState()
-    const [error , setError] = useState();
+   
     const {userId , flag,username , profilePicture} = useSelector((state)=>state)
     
     const submitHandler = (e)=>{
