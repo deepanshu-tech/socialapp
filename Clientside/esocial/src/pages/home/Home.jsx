@@ -1,3 +1,6 @@
+// created by Ishan Bajaj at 20220502 12:21.
+// 
+// this is made by me
 
 import { useSelector } from "react-redux";
 import Feed from "../../components/feed/Feed";

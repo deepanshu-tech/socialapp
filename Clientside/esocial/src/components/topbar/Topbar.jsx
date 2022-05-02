@@ -1,3 +1,7 @@
+// created by Ishan Bajaj at 20220502 12:18.
+// 
+// this is made by me
+
 import "./topbar.css"
 import { Person, Search ,Chat,Notifications } from "@mui/icons-material"
 import axios from "axios"
@@ -78,8 +82,6 @@ export default function Topbar() {
           </div>
           <img src={profilePicture} alt="" className="topbarImg" onClick={profileHandler} />
         </div>
-
-
         </div>
   )
 }

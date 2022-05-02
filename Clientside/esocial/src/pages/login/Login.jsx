@@ -1,3 +1,6 @@
+// created by Ishan Bajaj at 20220502 12:18.
+// 
+// this is made by me
 
 import axios from "axios";
 
@@ -5,7 +8,9 @@ import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./login.css"
-
+import React, { Component } from "react";
+import { Platform, StyleSheet, Text, View, TextInput } from "react-native";
+import NiceInputPassword from 'react-nice-input-password';
 
 
 export default function Login() {
@@ -61,7 +66,7 @@ export default function Login() {
                 <div className="loginRight">
                     <div className="loginBox">
                         <input placeholder="Username/Email" className="loginInput" onChange={event => setUserData(event.target.value)}/>
-                        <input placeholder="Password" className="loginInput" onChange={event => setPassword(event.target.value)}/>
+                        <input placeholder="Password"   className="loginInput" onChange={event => setPassword(event.target.value)}/>
                         <button className="loginButton" onClick={loginHandler} >LogIn</button>
                         <button className="loginRegister" onClick={createUserHandler}>Create a new Account</button>
                         <button className="loginRegister" onClick={forgotpwdhandler}>Forgot Password?</button>

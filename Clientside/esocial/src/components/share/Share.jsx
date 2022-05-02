@@ -1,3 +1,7 @@
+// created by Ishan Bajaj at 20220502 12:20.
+// 
+// this is made by me
+
 import "./share.css"
 import{PermMedia} from "@mui/icons-material"
 import { useLocation , useNavigate} from "react-router"

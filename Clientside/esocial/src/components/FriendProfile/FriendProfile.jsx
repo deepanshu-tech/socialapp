@@ -1,3 +1,7 @@
+// created by Ishan Bajaj at 20220502 12:19.
+// 
+// this is made by me
+
 import  "./FriendProfile.css"
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";

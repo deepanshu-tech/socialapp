@@ -98,15 +98,12 @@ app.post("/forgotpassword", async (req, res) => {
 app.listen(3000, (e) => {
   console.log("listening on the port");
 
-  mongoose
-    .connect(db, {
-      useNewUrlParser: true,
-    })
+  mongoose.connect("mongodb://localhost/socialapp")
     .then((result) => {
       console.log("Database Connected");
     })
     .catch((e) => {
-      console.log("Database Connectoon Failed");
+      console.log("Database Connection Failed");
       console.log(e);
     });
 });
