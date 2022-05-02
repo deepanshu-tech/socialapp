@@ -55,7 +55,7 @@ export default function Register() {
                        <input placeholder="Username" className="loginInput" onChange={ event => setUsername(event.target.value) }/>
                        <input placeholder="Name" className="loginInput" onChange={ event => setname(event.target.value) }/>
                         <input placeholder="Email" className="loginInput" onChange={ event => setemail(event.target.value) }/>
-                        <input placeholder="Password" className="loginInput" onChange={ event => setPassword(event.target.value) }/>
+                        <input placeholder="Password" className="loginInput" type="password" name="password" onChange={ event => setPassword(event.target.value) }/>
 
                         <button className="loginButton"onClick={submitButtonHandler}>SignUp</button>
                        

@@ -25,7 +25,7 @@ export default function Topbar() {
     if(window.location.pathname === '/home')
       dispatch({type:"set_flag" , value: (!flag) });
     else
-      navigate('/home' , {replace:false});
+      navigate('/home' );
     
   }
   const searchHandler = async(e)=>{
@@ -57,25 +57,9 @@ export default function Topbar() {
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
-          {/* <button className="topbarLogoutButton" type = "submit" htmlColor="tomato">Logout</button> */}
-          {/* onClick={window.open("http://localhost:5000")} */}
-            <a href = "http://localhost:5000" className="topbarLogout" > Logout </a>
-           
+            <a href = "http://localhost:5000"  className="topbarLogoutButton"> Logout </a>
           </div>
-          <div className="topbarIcons">
-            {/* <div className="topbarIconItem">
-              <Person/>
-              <span className="topbarIconBadge">1</span>
-            </div> */}
-            {/* <div className="topbarIconItem">
-              <Chat/>
-              <span className="topbarIconBadge">2</span>
-            </div> */}
-            {/* <div className="topbarIconItem">
-              <Notifications/>
-              <span className="topbarIconBadge">1</span>
-            </div> */}
-          </div>
+          
           <img src={profilePicture} alt="" className="topbarImg" onClick={profileHandler} />
         </div>
 

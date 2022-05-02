@@ -9,9 +9,9 @@ const UserSchema = require("./models/user");
 const User = mongoose.model("user", UserSchema);
 const generator = require("generate-password");
 var nodemailer = require("nodemailer");
-// dotenv.config();
-dotenv.config({ path: "./config.env" });
-const db = process.env.database;
+dotenv.config();
+//dotenv.config({ path: "./config.env" });
+//const db = process.env.database;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
@@ -98,10 +98,7 @@ app.post("/forgotpassword", async (req, res) => {
 app.listen(3000, (e) => {
   console.log("listening on the port");
 
-  mongoose
-    .connect(db, {
-      useNewUrlParser: true,
-    })
+  mongoose.connect("mongodb://localhost/socialapp")
     .then((result) => {
       console.log("Database Connected");
     })

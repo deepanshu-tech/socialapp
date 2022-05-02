@@ -61,7 +61,7 @@ export default function Login() {
                 <div className="loginRight">
                     <div className="loginBox">
                         <input placeholder="Username/Email" className="loginInput" onChange={event => setUserData(event.target.value)}/>
-                        <input placeholder="Password" className="loginInput" onChange={event => setPassword(event.target.value)}/>
+                        <input placeholder="Password" className="password" type="password" name="password" onChange={event => setPassword(event.target.value)}/>
                         <button className="loginButton" onClick={loginHandler} >LogIn</button>
                         <button className="loginRegister" onClick={createUserHandler}>Create a new Account</button>
                         <button className="loginRegister" onClick={forgotpwdhandler}>Forgot Password?</button>

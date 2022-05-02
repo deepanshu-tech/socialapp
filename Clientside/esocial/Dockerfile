@@ -1,10 +1,12 @@
 FROM node
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json .
-RUN npm install -g
-COPY . . 
+WORKDIR /app 
+COPY package.json /app 
+COPY yarn.lock /app
+RUN yarn install 
+COPY . /app 
+
 EXPOSE 5000
-CMD [ "npm","start" ]
+
+CMD [ "yarn","start" ]
 
 
