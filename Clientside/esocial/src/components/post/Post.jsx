@@ -7,7 +7,7 @@ import axios from "axios"
 export default function Post(props) {
   
   const [like,setLike] = useState(props.postDetails.likes.length)
-  const {userId} = useSelector(state=>state);
+  const {userId , profilePicture} = useSelector(state=>state);
   //const [isLiked,setIsLike] = useState(false)
   const likeHandler=async()=>{
     let data;
@@ -38,7 +38,7 @@ export default function Post(props) {
         {/* dividing wrapper in 3 top,center bottom  */}
              <div className="postTop">
              <div className="postTopLeft">
-               {/* <img src={props.postDetails.image} className="postProfileImg" alt="" /> */}
+               {/* <img src={props.postDetails.profilepicture} className="postProfileImg" alt="" /> */}
                <span className="postUsername">  {props.postDetails.username} </span>
                {/* <span className="postDate">X mins ago</span> */}
              </div> 

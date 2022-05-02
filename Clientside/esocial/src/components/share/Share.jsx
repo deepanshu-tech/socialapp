@@ -12,7 +12,7 @@ export default function Share() {
     const [desc , setDesc] = useState();
     const [imgfile , setImgFile] = useState()
     const [error , setError] = useState();
-    const {userId , flag,username} = useSelector((state)=>state)
+    const {userId , flag,username , profilePicture} = useSelector((state)=>state)
     
     const submitHandler = (e)=>{
         e.preventDefault();
@@ -46,7 +46,7 @@ export default function Share() {
     <form onSubmit={submitHandler}>
         <div className="shareWrapper">
             <div className="shareTop">
-                <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
+                <img className="shareProfileImg" src={profilePicture} alt="" />
                 <input placeholder =" What's on your mind Username" value = {desc} className="shareInput" onChange={event => setDesc(event.target.value)}/>
                 
                 

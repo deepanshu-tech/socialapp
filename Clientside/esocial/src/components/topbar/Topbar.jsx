@@ -1,16 +1,18 @@
 import "./topbar.css"
 import { Person, Search ,Chat,Notifications } from "@mui/icons-material"
 import axios from "axios"
-import { useNavigate } from "react-router"
+import { Navigate, useNavigate } from "react-router"
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Topbar() {
   
   
   const navigate = useNavigate();
-  const {profilePicture} = useSelector(state=>state);
+  const {profilePicture , flag} = useSelector(state=>state);
   const [searchData , setsearchdata] = useState();
+  const dispatch = useDispatch();
+  
   
   const profileHandler = (e)=>{
     e.preventDefault();
@@ -19,7 +21,12 @@ export default function Topbar() {
   }
   const logoHandler = (e)=>{
     e.preventDefault();
-    navigate('/home');
+    console.log(window.location.pathname);
+    if(window.location.pathname === '/home')
+      dispatch({type:"set_flag" , value: (!flag) });
+    else
+      navigate('/home' , {replace:false});
+    
   }
   const searchHandler = async(e)=>{
       e.preventDefault();

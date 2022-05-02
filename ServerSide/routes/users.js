@@ -20,8 +20,8 @@ router.post("/searchuser" , async(req,res)=>{
 });
 router.post("/searchname" , async(req,res)=>{
     try{
-        let result = await User.findOne({"userId":req.body.userId});
-        
+        let result = await User.findOne({"_id":req.body.userId});
+        console.log("result of searchname: " + req.body.userId);
         if(result)
             res.status(200).json(result);
         else 
