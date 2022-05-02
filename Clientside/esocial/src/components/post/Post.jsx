@@ -1,3 +1,7 @@
+// created by Ishan Bajaj at 20220502 12:20.
+// 
+// this is made by me
+
 import "./post.css"
 import { MoreVert } from "@mui/icons-material"
 import { useEffect, useState } from "react"

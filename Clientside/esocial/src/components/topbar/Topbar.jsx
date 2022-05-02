@@ -1,3 +1,7 @@
+// created by Ishan Bajaj at 20220502 12:18.
+// 
+// this is made by me
+
 import "./topbar.css"
 import {Search} from "@mui/icons-material"
 import axios from "axios"
@@ -62,8 +66,6 @@ export default function Topbar() {
           
           <img src={profilePicture} alt="" className="topbarImg" onClick={profileHandler} />
         </div>
-
-
         </div>
   )
 }

@@ -1,3 +1,6 @@
+// created by Ishan Bajaj at 20220502 12:18.
+// 
+// this is made by me
 
 import axios from "axios";
 
@@ -5,7 +8,9 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./login.css"
-
+import React, { Component } from "react";
+import { Platform, StyleSheet, Text, View, TextInput } from "react-native";
+import NiceInputPassword from 'react-nice-input-password';
 
 
 export default function Login() {

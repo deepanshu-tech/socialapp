@@ -103,7 +103,7 @@ app.listen(3000, (e) => {
       console.log("Database Connected");
     })
     .catch((e) => {
-      console.log("Database Connectoon Failed");
+      console.log("Database Connection Failed");
       console.log(e);
     });
 });

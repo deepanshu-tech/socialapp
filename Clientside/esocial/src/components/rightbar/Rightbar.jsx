@@ -1,3 +1,7 @@
+// created by Ishan Bajaj at 20220502 12:20.
+// 
+// this is made by me
+
 import "./rightbar.css"
 import { useSelector }  from "react-redux";
 import axios from "axios";
