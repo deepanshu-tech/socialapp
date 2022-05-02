@@ -70,6 +70,31 @@
     align-content: center;
     font-size: 10px;
 }
+
+.topbarLogoutButton{
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+    background-color:orange;
+    font-weight: 500;
+    margin: 20px;
+    cursor:pointer;
+    color: white;
+}
+.topbarSearchButton{
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+    background-color:red;
+    font-weight: 500;
+    margin: 20px;
+    cursor:pointer;
+    color: white;
+}
+.topbarLogout{
+    background-color:orange;
+    color: white;
+  }
 .topbarImg{
     width: 32px;
     height: 32px;

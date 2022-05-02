@@ -56,7 +56,7 @@ function UserDetails(){
                     <input type="text" onChange={e => setCP(e.target.value)}></input>
                 </label>
                 <br/>
-                <a href="http://localhost:3002" onClick={submitHandler}> Apply Changes</a>
+                <a href="http://localhost:3001" onClick={submitHandler}> Apply Changes</a>
             </div>
 
         </div>

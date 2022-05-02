@@ -45,12 +45,14 @@ export default function Topbar() {
           <div className="searchbar">
             <Search className="searchIcon"/>
             <input placeholder="Search for friends ,post or video" className="searchinput" value={searchData} onChange={event => setsearchdata(event.target.value)}/>
-            <input type="button" value="search" onClick={searchHandler}></input>
+            <input type="button" value="search" className="topbarSearchButton" onClick={searchHandler}></input>
           </div>
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
-            <a href = "http://localhost:3002"> Logout </a>
+          {/* <button className="topbarLogoutButton" type = "submit" htmlColor="tomato">Logout</button> */}
+          {/* onClick={window.open("http://localhost:5000")} */}
+            <a href = "http://localhost:5000" className="topbarLogout" > Logout </a>
            
           </div>
           <div className="topbarIcons">

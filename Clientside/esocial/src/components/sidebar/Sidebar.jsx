@@ -26,7 +26,8 @@ export default function Sidebar() {
           <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
             <spam className="sidebarFriendName">Wong</spam>
-          </li>
+            </li>
+          {/* 
           <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
             <spam className="sidebarFriendName">Wong</spam>
@@ -111,8 +112,8 @@ export default function Sidebar() {
             <spam className="sidebarFriendName">Wong</spam>
           </li>          <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
-            <spam className="sidebarFriendName">Wong</spam>
-          </li>          <li className="sidebarFriendList" >
+            <spam className="sidebarFriendName">Wong</spam> */}
+          {/* </li>          <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
             <spam className="sidebarFriendName">Wong</spam>
           </li>          <li className="sidebarFriendList" >
@@ -130,7 +131,7 @@ export default function Sidebar() {
           <li className="sidebarFriendList" >
             <img src="/assets/person/2.jpeg" alt="" className="sidebarFriendImage" />
             <spam className="sidebarFriendName">Wong</spam>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
